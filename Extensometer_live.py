@@ -270,7 +270,7 @@ try:
             value=max_tensile,
              title={
                 "text": f"Max Tensile Strain (με)<br><sub>{tens_timestamp}</sub>",
-                "font": {"size": 16}
+                "font": {"size": 20}
                 },
             gauge={
                 "axis": {"range": [0, 200]},
