@@ -239,7 +239,7 @@ try:
 
         st.plotly_chart(fig_temp, use_container_width=True)
 
-        st.markdown("### 🚨 Strain Limits")
+        st.markdown("### 🚨 Maximum Compression and Tensile Strains Recorded To Date")
         # Compression Gauge
         gauge_compression = go.Figure(go.Indicator(
             mode="gauge+number",
