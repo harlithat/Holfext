@@ -22,9 +22,6 @@ def check_password():
             st.stop()
         else:
             st.success("Access granted ✅")
-
-        if password == "LetMeIn123":
-            st.success("Access granted ✅")
             st.session_state["password"] = ""
 
 check_password()
