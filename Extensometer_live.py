@@ -11,7 +11,7 @@ def check_password():
         st.session_state.password_correct = False
 
     if not st.session_state.password_correct:
-        with st.container():
+        with st.form("password_form"):
             st.markdown("""
                 <div style='padding:2rem; background-color:#f5f5f5; border-radius:10px;'>
                     <h3>🔐 Access Restricted</h3>
@@ -20,16 +20,19 @@ def check_password():
             """, unsafe_allow_html=True)
 
             password = st.text_input("Password", type="password")
+            submitted = st.form_submit_button("Submit")
 
-            if password == "LetMeIn123":
-                st.session_state.password_correct = True
-                st.experimental_rerun()  # Refresh the app to hide login box
-            elif password:
-                st.warning("Access denied. Please try again.")
-                st.stop()
+            if submitted:
+                if password == "LetMeIn123":
+                    st.session_state.password_correct = True
+                    st.success("Access granted ✅")
+                else:
+                    st.error("Access denied. Please try again.")
+                    st.stop()
 
     if not st.session_state.password_correct:
         st.stop()
+
 
 check_password()
 
