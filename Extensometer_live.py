@@ -6,6 +6,25 @@ import plotly.express as px
 from streamlit_autorefresh import st_autorefresh
 import os
 
+def check_password():
+    with st.container():
+        st.markdown("""
+            <div style='padding:2rem; background-color:#f5f5f5; border-radius:10px;'>
+                <h3>🔐 Access Restricted</h3>
+                <p>Please enter the password to continue.</p>
+            </div>
+        """, unsafe_allow_html=True)
+
+        password = st.text_input("Password", type="password")
+
+        if password != "LetMeIn123":
+            st.warning("Access denied. Please try again.")
+            st.stop()
+        else:
+            st.success("Access granted ✅")
+
+check_password()
+
 st.set_page_config(
     page_title="Extensometer Dashboard – Holftontein Site",
     page_icon="📈",
