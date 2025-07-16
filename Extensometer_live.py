@@ -7,22 +7,29 @@ from streamlit_autorefresh import st_autorefresh
 import os
 
 def check_password():
-    with st.container():
-        st.markdown("""
-            <div style='padding:2rem; background-color:#f5f5f5; border-radius:10px;'>
-                <h3>🔐 Access Restricted</h3>
-                <p>Please enter the password to continue.</p>
-            </div>
-        """, unsafe_allow_html=True)
+    if "password_correct" not in st.session_state:
+        st.session_state.password_correct = False
 
-        password = st.text_input("Password", type="password")
+    if not st.session_state.password_correct:
+        with st.container():
+            st.markdown("""
+                <div style='padding:2rem; background-color:#f5f5f5; border-radius:10px;'>
+                    <h3>🔐 Access Restricted</h3>
+                    <p>Please enter the password to continue.</p>
+                </div>
+            """, unsafe_allow_html=True)
 
-        if password != "LetMeIn123":
-            st.warning("Access denied. Please try again.")
-            st.stop()
-        else:
-            st.success("Access granted ✅")
-            st.session_state["password"] = ""
+            password = st.text_input("Password", type="password")
+
+            if password == "LetMeIn123":
+                st.session_state.password_correct = True
+                st.experimental_rerun()  # Refresh the app to hide login box
+            elif password:
+                st.warning("Access denied. Please try again.")
+                st.stop()
+
+    if not st.session_state.password_correct:
+        st.stop()
 
 check_password()
 
