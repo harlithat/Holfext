@@ -19,11 +19,9 @@ def check_password():
             """, unsafe_allow_html=True)
             password = st.text_input("Password", type="password")
             submitted = st.form_submit_button("Submit")
-
             if submitted:
                 if password == "LetMeIn123":
                     st.session_state.password_correct = True
-                    st.experimental_rerun()  # ✅ this triggers an immediate refresh
                 else:
                     st.error("Access denied. Please try again.")
                     st.stop()
@@ -339,6 +337,6 @@ def main_app():
         st.stop()
 
 check_password()
-
+st.experimental_rerun()  # ✅ this triggers an immediate refresh
 main_app()  # 👈 only runs if password was correct
 
