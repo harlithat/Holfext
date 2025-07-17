@@ -5,6 +5,34 @@ import plotly.express as px
 from streamlit_autorefresh import st_autorefresh
 import os
 
+def check_password():
+    if "password_correct" not in st.session_state:
+        st.session_state.password_correct = False
+
+    if not st.session_state.password_correct:
+        with st.form("password_form"):
+            st.markdown("""
+                <div style='padding:2rem; background-color:#f5f5f5; border-radius:10px;'>
+                    <h3>🔐 Access Restricted</h3>
+                    <p>Please enter the password to continue.</p>
+                </div>
+            """, unsafe_allow_html=True)
+
+            password = st.text_input("Password", type="password")
+            submitted = st.form_submit_button("Submit")
+
+            if submitted:
+                if password == "LetMeIn123":
+                    st.session_state.password_correct = True
+                else:
+                    st.error("Access denied. Please try again.")
+                    st.stop()
+
+    if not st.session_state.password_correct:
+        st.stop()
+
+check_password()
+
 def main_app():
     st.set_page_config(
         page_title="Extensometer Dashboard – Holftontein Site",
@@ -309,34 +337,5 @@ def main_app():
         st.error(f"Error loading CSV from Google Drive: {e}")
         st.stop()
 
-
-def check_password():
-    if "password_correct" not in st.session_state:
-        st.session_state.password_correct = False
-
-    if not st.session_state.password_correct:
-        with st.form("password_form"):
-            st.markdown("""
-                <div style='padding:2rem; background-color:#f5f5f5; border-radius:10px;'>
-                    <h3>🔐 Access Restricted</h3>
-                    <p>Please enter the password to continue.</p>
-                </div>
-            """, unsafe_allow_html=True)
-
-            password = st.text_input("Password", type="password")
-            submitted = st.form_submit_button("Submit")
-
-            if submitted:
-                if password == "LetMeIn123":
-                    st.session_state.password_correct = True
-                else:
-                    st.error("Access denied. Please try again.")
-                    st.stop()
-
-    if not st.session_state.password_correct:
-        st.stop()
-
-
-check_password()
 main_app()  # 👈 only runs if password was correct
 
