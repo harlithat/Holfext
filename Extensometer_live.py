@@ -17,7 +17,6 @@ def check_password():
                     <p>Please enter the password to continue.</p>
                 </div>
             """, unsafe_allow_html=True)
-
             password = st.text_input("Password", type="password")
             submitted = st.form_submit_button("Submit")
 
