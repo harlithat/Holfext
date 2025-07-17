@@ -24,6 +24,7 @@ def check_password():
             if submitted:
                 if password == "LetMeIn123":
                     st.session_state.password_correct = True
+                    st.experimental_rerun()  # ✅ this triggers an immediate refresh
                 else:
                     st.error("Access denied. Please try again.")
                     st.stop()
