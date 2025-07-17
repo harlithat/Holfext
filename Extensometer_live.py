@@ -305,9 +305,9 @@ def main_app():
                 unsafe_allow_html=True
             )
 
-except Exception as e:
-    st.error(f"Error loading CSV from Google Drive: {e}")
-    st.stop()
+    except Exception as e:
+        st.error(f"Error loading CSV from Google Drive: {e}")
+        st.stop()
 
 
 def check_password():
