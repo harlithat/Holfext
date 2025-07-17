@@ -337,6 +337,5 @@ def main_app():
         st.stop()
 
 check_password()
-st.experimental_rerun()  # ✅ this triggers an immediate refresh
 main_app()  # 👈 only runs if password was correct
 
