@@ -29,7 +29,7 @@ def check_password():
     
     if st.session_state.get("do_refresh"):
         del st.session_state["do_refresh"]
-        st.experimental_rerun()
+        st.rerun()
 
     if not st.session_state.password_correct:
         st.stop() 
