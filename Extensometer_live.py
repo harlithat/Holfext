@@ -36,7 +36,6 @@ def check_password():
 
 
 def main_app():
-    st.experimental_rerun()
     st.set_page_config(
     page_title="Extensometer Dashboard – Holftontein Site",
     page_icon="📈",
