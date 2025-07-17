@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -6,48 +5,19 @@ import plotly.express as px
 from streamlit_autorefresh import st_autorefresh
 import os
 
-def check_password():
-    if "password_correct" not in st.session_state:
-        st.session_state.password_correct = False
+def main_app():
+    st.set_page_config(
+        page_title="Extensometer Dashboard – Holftontein Site",
+        page_icon="📈",
+        layout="wide"
+    )
 
-    if not st.session_state.password_correct:
-        with st.form("password_form"):
-            st.markdown("""
-                <div style='padding:2rem; background-color:#f5f5f5; border-radius:10px;'>
-                    <h3>🔐 Access Restricted</h3>
-                    <p>Please enter the password to continue.</p>
-                </div>
-            """, unsafe_allow_html=True)
-
-            password = st.text_input("Password", type="password")
-            submitted = st.form_submit_button("Submit")
-
-            if submitted:
-                if password == "LetMeIn123":
-                    st.session_state.password_correct = True
-                    st.success("Access granted ✅")
-                else:
-                    st.error("Access denied. Please try again.")
-                    st.stop()
-
-    if not st.session_state.password_correct:
-        st.stop()
-
-
-check_password()
-
-st.set_page_config(
-    page_title="Extensometer Dashboard – Holftontein Site",
-    page_icon="📈",
-    layout="wide"
-)
-
-st.markdown("""
-    <div style='text-align: center; padding: 2rem 0; background-color: #003366; color: white; border-radius: 10px;'>
-        <h1 style='margin-bottom: 0;'>📡 Extensometer Dashboard</h1>
-        <h3 style='margin-top: 0;'>Holftontein Site – Real-Time Structural Monitoring</h3>
-    </div>
-""", unsafe_allow_html=True)
+    st.markdown("""
+        <div style='text-align: center; padding: 2rem 0; background-color: #003366; color: white; border-radius: 10px;'>
+            <h1 style='margin-bottom: 0;'>📡 Extensometer Dashboard</h1>
+            <h3 style='margin-top: 0;'>Holftontein Site – Real-Time Structural Monitoring</h3>
+        </div>
+    """, unsafe_allow_html=True)
 
 # Auto-refresh every 10 minutes (600000 milliseconds)
 st_autorefresh(interval=600000, key="csv_autorefresh")
@@ -339,3 +309,34 @@ try:
 except Exception as e:
     st.error(f"Error loading CSV from Google Drive: {e}")
     st.stop()
+
+
+def check_password():
+    if "password_correct" not in st.session_state:
+        st.session_state.password_correct = False
+
+    if not st.session_state.password_correct:
+        with st.form("password_form"):
+            st.markdown("""
+                <div style='padding:2rem; background-color:#f5f5f5; border-radius:10px;'>
+                    <h3>🔐 Access Restricted</h3>
+                    <p>Please enter the password to continue.</p>
+                </div>
+            """, unsafe_allow_html=True)
+
+            password = st.text_input("Password", type="password")
+            submitted = st.form_submit_button("Submit")
+
+            if submitted:
+                if password == "LetMeIn123":
+                    st.session_state.password_correct = True
+                else:
+                    st.error("Access denied. Please try again.")
+                    st.stop()
+
+    if not st.session_state.password_correct:
+        st.stop()
+
+check_password()
+main_app()  # 👈 only runs if password was correct
+
