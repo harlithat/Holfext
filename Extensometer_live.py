@@ -340,5 +340,5 @@ def main_app():
 
 check_password()
 
-main_app()  # 👈 only runs if password was correct
+
 
