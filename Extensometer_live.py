@@ -338,5 +338,6 @@ def main_app():
         st.error(f"Error loading CSV from Google Drive: {e}")
         st.stop()
 
+check_password()
 main_app()  # 👈 only runs if password was correct
 
