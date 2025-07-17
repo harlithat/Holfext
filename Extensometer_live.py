@@ -35,6 +35,19 @@ def check_password():
 
 
 def main_app():
+    st.set_page_config(
+    page_title="Extensometer Dashboard – Holftontein Site",
+    page_icon="📈",
+    layout="wide"
+    )
+
+    st.markdown("""
+    <div style='text-align: center; padding: 2rem 0; background-color: #003366; color: white; border-radius: 10px;'>
+        <h1 style='margin-bottom: 0;'>📡 Extensometer Dashboard</h1>
+        <h3 style='margin-top: 0;'>Holftontein Site – Real-Time Structural Monitoring</h3>
+    </div>
+    """, unsafe_allow_html=True)
+     
     # Auto-refresh every 10 minutes (600000 milliseconds)
     st_autorefresh(interval=600000, key="csv_autorefresh")
     
@@ -326,20 +339,6 @@ def main_app():
         st.stop()
 
 check_password()
-
-st.set_page_config(
-    page_title="Extensometer Dashboard – Holftontein Site",
-    page_icon="📈",
-    layout="wide"
-)
-
-st.markdown("""
-    <div style='text-align: center; padding: 2rem 0; background-color: #003366; color: white; border-radius: 10px;'>
-        <h1 style='margin-bottom: 0;'>📡 Extensometer Dashboard</h1>
-        <h3 style='margin-top: 0;'>Holftontein Site – Real-Time Structural Monitoring</h3>
-    </div>
-""", unsafe_allow_html=True)
-
 
 main_app()  # 👈 only runs if password was correct
 
