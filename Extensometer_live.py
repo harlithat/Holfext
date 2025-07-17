@@ -13,7 +13,7 @@ def check_password():
         with st.form("password_form"):
             st.markdown("""
                 <div style='padding:2rem; background-color:#f5f5f5; border-radius:10px;'>
-                    <h3>🔐 Access Restricted</h3>
+                    <h3>🔐 Access Restricted!</h3>
                     <p>Please enter the password to continue.</p>
                 </div>
             """, unsafe_allow_html=True)
@@ -31,6 +31,7 @@ def check_password():
     if not st.session_state.password_correct:
         st.stop()
 
+# ⛔️ STOP EVERYTHING if password isn't correct
 check_password()
 
 def main_app():
